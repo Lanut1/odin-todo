@@ -1,0 +1,18 @@
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
+
+body {
+  margin: 0;
+  box-sizing: border-box;
+  display: grid;
+  grid-template: auto/1fr 4fr;
+}
+
+.sidebar {
+  background-color: grey;
+}
