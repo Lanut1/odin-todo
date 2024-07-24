@@ -1,7 +1,7 @@
 class Task {
     static nextId = 0;
 
-    constructor(title, description, date, priority, projectId = 0) {
+    constructor(title, description, date, priority, projectId) {
         this.id = Task.nextId++;
         this.title = title;
         this.description = description;

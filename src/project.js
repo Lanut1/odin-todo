@@ -1,5 +1,5 @@
 class Project {
-    static nextId = 0;
+    static nextId = 1;
 
     constructor(title) {
         this.title = title;
