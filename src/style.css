@@ -8,15 +8,209 @@
 
 body {
   margin: 0;
+  padding: 0;
   box-sizing: border-box;
   display: grid;
   grid-template: auto/1fr 4fr;
+  min-height: 100vh;
 }
 
 .sidebar {
   background-color: grey;
+  display: flex;
+  flex-direction: column;
+  padding: 5%;
+  gap: 1rem;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.sidebar-logo {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.sidebar-header {
+  font-size: 2rem;
+}
+
+.sidebar-nav,
+.sidebar-nav-projects,
+.sidebar-projects-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sidebar-nav-item button,
+.nav-projects-add button,
+.sidebar-nav-projects-header button,
+.sidebar-project-card {
+  display: flex;
+  padding: 0;
+  background-color: transparent;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: flex-start;
+  border: none;
+  cursor: pointer;
+}
+
+.sidebar-nav-item button,
+.sidebar-project-card {
+  font-size: 1.1rem;
+}
+
+#new-task,
+.sidebar-nav-projects-header button,
+.nav-projects-add button {
+  font-size: 1.5rem;
+  font-weight: bold;
+  transition: 0.5s;
+}
+
+#new-task:hover,
+.sidebar-nav-projects-header button:hover,
+.nav-projects-add button:hover {
+  scale: 1.1;
+}
+
+.project-card {
+  font-size: 1.5rem;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.5s;
+  padding: 5px;
+  background-color: bisque;
+}
+
+.project-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 2px 2px 3px;
+}
+
+#add-project-task {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  transition: 0.5s;
+}
+
+.project-edit,
+.project-delete,
+.task-edit,
+.task-delete {
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+#add-project-task:hover,
+.project-edit:hover,
+.project-delete:hover,
+.task-edit:hover,
+.task-delete:hover {
+  scale: 1.1;
+}
+
+.main-section-header {
+  display: flex;
+  justify-content: space-between;
 }
 
 .completed {
-  background-color: aqua;
+  background-color: rgb(0, 0, 0, 0.5);
+  text-decoration: line-through;
+}
+
+.main-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 2%;
+}
+
+.main-section-header {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.main-section-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.task-card {
+  display: flex;
+  flex-direction: column;
+  background-color: bisque;
+  transition: 0.5s;
+}
+
+.task-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 2px 2px 3px;
+}
+
+.first-row-container,
+.second-row-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px;
+}
+
+.title-container,
+.edit-container {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.task-checkbox {
+  width: 1.2em;
+  height: 1.2em;
+  background-color: white;
+  border-radius: 50%;
+  vertical-align: middle;
+  border: 3px solid #ddd;
+  appearance: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.task-checkbox:checked {
+  background-color: blue;
+}
+
+.task-card-title {
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.task-card-priority {
+  width: 10vw;
+  text-align: center;
+}
+
+.task-card-priority.priority-high {
+  color: red;
+}
+
+.task-card-priority.priority-medium {
+  color: orange;
+}
+
+.task-card-priority.priority-low {
+  color: green;
+}
+
+.task-card-description,
+.task-card-project {
+  font-size: 1rem;
+  padding: 4px;
 }
