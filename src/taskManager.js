@@ -1,5 +1,6 @@
 import { Task } from "./task";
 import { isToday, isTomorrow, isThisWeek, isBefore, startOfToday } from "date-fns";
+import { openDialog } from "./utils";
 
 function submitTaskForm(taskDialog, taskProjectId) {
     const taskTitle = document.querySelector("#task-title").value;
@@ -107,7 +108,7 @@ function createTaskCard(task, mainSectionContent) {
 
 function showAddTaskDialog(projectId, taskDialog) {
     taskDialog.dataset.projectId = projectId;
-    taskDialog.showModal();
+    openDialog(taskDialog);
 }
 
 function openEditTaskDialog(taskId, taskDialog) {
@@ -123,7 +124,7 @@ function openEditTaskDialog(taskId, taskDialog) {
         taskDialog.dataset.projectId = task.projectId;
         taskDialog.dataset.taskId = taskId;
         taskDialog.dataset.isEdit = "true";
-        taskDialog.showModal();
+        openDialog(taskDialog);
     }
 }
 

@@ -1,5 +1,6 @@
 import { Project } from "./project";
 import { createTaskCard } from "./taskManager";
+import { openDialog } from "./utils";
 
 function submitProjectForm(projectDialog) {
     const projectTitle = document.querySelector("#project-title").value;
@@ -99,14 +100,14 @@ function openEditProjectDialog(projectId, projectDialog) {
         projectTitleEdit.value = project.title;
         projectDialog.dataset.projectId = projectId;
         projectDialog.dataset.isEdit = "true";
-        projectDialog.showModal();
+        openDialog(projectDialog);
     }
 }
 
 function openDeleteProjectDialog(projectId) {
     const confirmDeleteDialog = document.querySelector("#confirm-project-delete");
     confirmDeleteDialog.dataset.projectId = projectId;
-    confirmDeleteDialog.showModal();
+    openDialog(confirmDeleteDialog);
 }
 
 function deleteProject(projectId) {

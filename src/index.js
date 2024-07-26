@@ -4,7 +4,7 @@ import "./style.css";
 import logo from "./images/check.png";
 import { submitProjectForm, createSidebarProject, displayProject, openEditProjectDialog, openDeleteProjectDialog, deleteProject, showAllProjects } from "./projectManager.js";
 import { submitTaskForm, showAddTaskDialog, openEditTaskDialog, deleteTask, completeTask, showAllTasks, showTodayTasks, showTomorrowTasks, showWeekTasks, showOverdue, showImportant, showCompleted } from "./taskManager.js";
-import { initializeNextId } from "./utils.js";
+import { openDialog, closeDialog, initializeNextId } from "./utils.js";
 import 'pretty-checkbox/dist/pretty-checkbox.min.css';
 
 document.querySelector(".sidebar-logo img").src = logo;
@@ -26,15 +26,15 @@ addTaskButton.addEventListener("click", () => {
 });
 
 addProjectButton.addEventListener("click", () => {
-    projectDialog.showModal();
+    openDialog(projectDialog);
 });
 
 closeTaskDialog.addEventListener("click", () => {
-    taskDialog.close();
+    closeDialog(taskDialog);
 });
 
 closeProjectDialog.addEventListener("click", () => {
-    projectDialog.close();
+    closeDialog(projectDialog);
 });
 
 initializeNextId("tasks", Task);
@@ -45,7 +45,7 @@ taskForm.addEventListener("submit", (event) => {
     const taskProjectId = taskDialog.dataset.projectId;
     submitTaskForm(taskDialog, taskProjectId);
     taskForm.reset();
-    taskDialog.close();
+    closeDialog(taskDialog);
 
     if (taskProjectId == 0) {
         showAllTasks(mainSectionHeader, mainSectionContent);
@@ -58,7 +58,7 @@ projectForm.addEventListener("submit", (event) => {
     event.preventDefault();
     submitProjectForm(projectDialog);
     projectForm.reset();
-    projectDialog.close();
+    closeDialog(projectDialog);
     showAllProjects(mainSectionHeader, mainSectionContent, sidebarProjects);
 })
 
@@ -81,14 +81,14 @@ const cancelButton = document.querySelector("#cancel-delete");
 const confirmDeleteButton = document.querySelector("#confirm-delete");
 
 cancelButton.addEventListener("click", () => {
-    confirmDeleteDialog.close();
+    closeDialog(confirmDeleteDialog);
 })
 
 confirmDeleteButton.addEventListener("click", () => {
     const projectId = confirmDeleteDialog.dataset.projectId;
     deleteProject(projectId);
-    showAllProjects(mainSectionHeader, mainSectionContent, sidebarProjects); //
-    confirmDeleteDialog.close();
+    showAllProjects(mainSectionHeader, mainSectionContent, sidebarProjects);
+    closeDialog(confirmDeleteDialog);
 })
 
 mainSectionHeader.addEventListener("click", (event) => {

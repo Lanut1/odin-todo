@@ -5,4 +5,18 @@ function initializeNextId(objectName, objectClass) {
     }
 }
 
-export { initializeNextId };
+function openDialog(dialog) {
+    dialog.classList.add("show");
+    dialog.showModal();
+}
+
+function closeDialog(dialog) {
+    dialog.classList.remove("show");
+    dialog.classList.add("hide");
+    setTimeout(() => {
+        dialog.close();
+        dialog.classList.remove("hide");
+    }, 500);
+}
+
+export { initializeNextId, openDialog, closeDialog };

@@ -100,6 +100,7 @@ body {
   background-color: transparent;
   border: none;
   transition: 0.5s;
+  cursor: pointer;
 }
 
 .project-edit,
@@ -213,4 +214,123 @@ body {
 .task-card-project {
   font-size: 1rem;
   padding: 4px;
+}
+
+@keyframes scaleIn {
+  from { 
+      transform: scale(0.8);
+      opacity: 0;
+  }
+  to { 
+      transform: scale(1);
+      opacity: 1;
+  }
+}
+
+@keyframes scaleOut {
+  from {
+      transform: scale(1);
+      opacity: 1;
+  }
+  to {
+      transform: scale(0.8);
+      opacity: 0;
+  }
+  
+}
+
+#task-dialog {
+  opacity: 0;
+}
+
+.show {
+  animation: scaleIn 0.7s ease forwards;
+}
+
+.hide {
+  animation: scaleOut 0.5s ease forwards;
+}
+
+#close-task-dialog,
+#close-project-dialog {
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+}
+
+#task-dialog,
+#project-dialog,
+#confirm-project-delete {
+  border-radius: 15px;
+  box-shadow: 0 0 15px;
+  width: 300px;
+}
+
+#task-form,
+#project-form,
+.confirm-delete-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 2%;
+}
+
+.confirm-delete-container {
+  font-size: 1.3rem;
+  align-items: start;
+}
+
+.task-input-title,
+.task-input-description,
+.task-input-date,
+.task-input-priority,
+.project-input {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.dialog-buttons {
+  display: flex;
+  gap: 3rem;
+  align-self: center;
+}
+
+#add-new-task,
+#add-new-project,
+#confirm-delete,
+#cancel-delete {
+  border-radius: 5px;
+  background-color: bisque;
+  font-size: 1.3rem;
+  padding: 4px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+#add-new-task:hover,
+#add-new-project:hover,
+#confirm-delete:hover,
+#cancel-delete:hover {
+  transform: translateY(-3px);
+  box-shadow: 1px 2px 3px;
+}
+
+input[type=text],
+input[type=date],
+select {
+  font-family: inherit;
+  font-size: inherit;
+  border-radius: 5px;
+  padding: 4px;
+}
+
+input[type=text]:focus,
+input[type=date]:focus,
+select:focus {
+  box-shadow: 0 0 7px red;
 }
