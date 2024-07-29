@@ -23,4 +23,17 @@ function isMobile() {
     return window.innerWidth <= 768;
   }
 
-export { initializeNextId, openDialog, closeDialog, isMobile };
+ function createDOMElement(tagName, ...className) {
+    const element = document.createElement(tagName);
+    if (className && className.length > 0) element.classList.add(...className);
+    return element;
+}
+
+function initializeEventListeners(actions) {
+    actions.forEach(action => {
+        const button = document.querySelector(action.selector);
+        button.addEventListener("click", action.handler);
+    });
+};
+
+export { initializeNextId, openDialog, closeDialog, isMobile, createDOMElement, initializeEventListeners };
