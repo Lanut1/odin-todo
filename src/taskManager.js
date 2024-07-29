@@ -23,6 +23,32 @@ function submitTaskForm(taskDialog, taskProjectId) {
     localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
+function createCheckbox(task) {
+    const checkboxContainer = document.createElement("div");
+    checkboxContainer.classList.add("pretty", "p-icon", "p-round", "p-tada");
+  
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.classList.add("task-checkbox");
+    checkbox.checked = task.completed;
+    checkboxContainer.appendChild(checkbox);
+  
+    const stateDiv = document.createElement("div");
+    stateDiv.classList.add("state", "p-success");
+  
+    const icon = document.createElement("i");
+    icon.classList.add("icon", "mdi", "mdi-check");
+    stateDiv.appendChild(icon);
+
+    const label = document.createElement("label");
+    label.textContent = "";
+    stateDiv.appendChild(label);
+  
+    checkboxContainer.appendChild(stateDiv);
+  
+    return checkboxContainer;
+  }
+
 function createTaskCard(task, mainSectionContent) {
     const taskCard = document.createElement("div");
     taskCard.classList.add("task-card");
@@ -33,10 +59,12 @@ function createTaskCard(task, mainSectionContent) {
     const titleContainer = document.createElement("div");
     titleContainer.classList.add("title-container");
 
-    const taskCheckbox = document.createElement("input");
-    taskCheckbox.type = "checkbox";
-    taskCheckbox.classList.add("task-checkbox");
-    taskCheckbox.checked = task.completed;
+    const taskCheckbox = createCheckbox(task);
+
+    // const taskCheckbox = document.createElement("input");
+    // taskCheckbox.type = "checkbox";
+    // taskCheckbox.classList.add("task-checkbox");
+    // taskCheckbox.checked = task.completed;
     if (task.completed) {
         taskCard.classList.add("completed");
     }
@@ -58,17 +86,13 @@ function createTaskCard(task, mainSectionContent) {
     taskCardDate.innerText = formattedDate;
     editContainer.appendChild(taskCardDate);
 
-    const taskCardPriority = document.createElement("div");
-    taskCardPriority.classList.add("task-card-priority");
-    taskCardPriority.innerText = task.priority;
     if (task.priority === "high") {
-        taskCardPriority.classList.add("priority-high");
+        taskCard.classList.add("priority-high");
     } else if (task.priority === "medium") {
-        taskCardPriority.classList.add("priority-medium");
+        taskCard.classList.add("priority-medium");
     } else if (task.priority === "low") {
-        taskCardPriority.classList.add("priority-low");
+        taskCard.classList.add("priority-low");
     }
-    editContainer.appendChild(taskCardPriority);
 
     const editButton = document.createElement("span");
     editButton.classList.add("material-symbols-outlined", "task-edit");

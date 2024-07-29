@@ -19,4 +19,8 @@ function closeDialog(dialog) {
     }, 500);
 }
 
-export { initializeNextId, openDialog, closeDialog };
+function isMobile() {
+    return window.innerWidth <= 768;
+  }
+
+export { initializeNextId, openDialog, closeDialog, isMobile };

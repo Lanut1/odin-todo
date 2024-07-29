@@ -6,6 +6,22 @@
   'opsz' 24
 }
 
+@font-face {
+  font-family: 'inconsolatamedium';
+  src: url('fonts/inconsolata-webfont.woff2') format('woff2'),
+       url('fonts/inconsolata-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'baby_dollregular';
+  src: url('fonts/baby_doll-webfont.woff2') format('woff2'),
+       url('fonts/baby_doll-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -16,14 +32,19 @@ body {
 }
 
 .sidebar {
-  background-color: grey;
+  background-color: #E2C499;
+  font-family: 'inconsolatamedium', sans-serif;
   display: flex;
   flex-direction: column;
-  padding: 5%;
+  padding: 0.5rem;
   gap: 1rem;
   position: sticky;
   top: 0;
-  height: 100vh;
+  height: calc(100vh - 1rem);
+}
+
+button {
+  font-family: inherit;
 }
 
 .sidebar-logo {
@@ -38,11 +59,26 @@ body {
 
 .sidebar-nav,
 .sidebar-nav-projects,
-.sidebar-projects-container {
+.projects-container {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
+
+.projects-container {
+  overflow-y: auto;
+  max-height: 30vh;
+}
+
+.projects-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.projects-container::-webkit-scrollbar-thumb{
+  background-color: bisque;
+  border-radius: 10px;
+}
+
 
 .sidebar-nav-item button,
 .nav-projects-add button,
@@ -60,7 +96,7 @@ body {
 
 .sidebar-nav-item button,
 .sidebar-project-card {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
 }
 
 #new-task,
@@ -78,17 +114,20 @@ body {
 }
 
 .project-card {
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   cursor: pointer;
+  font-family: "baby_dollregular";
   font-weight: bold;
   transition: 0.5s;
-  padding: 5px;
+  padding: 1rem 1rem 1rem 4%;
+  border-radius: 7px;
   background-color: bisque;
+  background-image: linear-gradient(to right, #FA4032 3%, transparent 3%);
 }
 
 .project-card:hover {
   transform: translateY(-3px);
-  box-shadow: 2px 2px 3px;
+  box-shadow: 0 3px 5px rgb(0, 0, 0, 0.5);
 }
 
 #add-project-task {
@@ -96,7 +135,8 @@ body {
   gap: 0.5rem;
   font-size: 1.5rem;
   font-weight: bold;
-  padding: 0;
+  font-family: "inconsolatamedium";
+  padding-left: 1rem;
   background-color: transparent;
   border: none;
   transition: 0.5s;
@@ -122,12 +162,20 @@ body {
 .main-section-header {
   display: flex;
   justify-content: space-between;
+  font-family: 'inconsolatamedium', sans-serif;
+  font-size: 2rem;
+  font-weight: bold;
 }
 
-.completed {
-  background-color: rgb(0, 0, 0, 0.5);
-  text-decoration: line-through;
+.task-card.completed {
+  opacity: 0.8;
 }
+
+.task-card.completed .task-card-title,
+.task-card.completed .task-card-description {
+    text-decoration: line-through;
+}
+
 
 .main-section {
   display: flex;
@@ -136,27 +184,25 @@ body {
   padding: 2%;
 }
 
-.main-section-header {
-  font-size: 2rem;
-  font-weight: bold;
-}
-
 .main-section-content {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
+  overflow-y: auto;
 }
 
 .task-card {
   display: flex;
   flex-direction: column;
+  font-family: 'baby_dollregular', monospace;
   background-color: bisque;
   transition: 0.5s;
+  border-radius: 7px;
 }
 
 .task-card:hover {
   transform: translateY(-3px);
-  box-shadow: 2px 2px 3px;
+  box-shadow: 0 3px 5px rgb(0, 0, 0, 0.5);
 }
 
 .first-row-container,
@@ -164,12 +210,14 @@ body {
   display: flex;
   justify-content: space-between;
   padding: 4px;
+  margin-left: 3%;
 }
 
 .title-container,
 .edit-container {
   display: flex;
   gap: 0.5rem;
+  align-items: center;
 }
 
 .task-checkbox {
@@ -184,12 +232,8 @@ body {
   cursor: pointer;
 }
 
-.task-checkbox:checked {
-  background-color: blue;
-}
-
 .task-card-title {
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   font-weight: bold;
 }
 
@@ -198,22 +242,27 @@ body {
   text-align: center;
 }
 
-.task-card-priority.priority-high {
-  color: red;
+.task-card.priority-high {
+  background-image: linear-gradient(to right, #C8000A 3%, transparent 3%);
 }
 
-.task-card-priority.priority-medium {
-  color: orange;
+.task-card.priority-medium {
+  background-image: linear-gradient(to right, #E8A735 3%, transparent 3%);
 }
 
-.task-card-priority.priority-low {
-  color: green;
+.task-card.priority-low {
+  background-image: linear-gradient(to right, #506D2F 3%, transparent 3%);
 }
 
 .task-card-description,
 .task-card-project {
-  font-size: 1rem;
+  font-size: 1.2rem;
   padding: 4px;
+}
+
+.task-card-project,
+.task-card-date {
+  font-family: "inconsolatamedium", sans-serif;
 }
 
 @keyframes scaleIn {
@@ -235,8 +284,17 @@ body {
   to {
       transform: scale(0.8);
       opacity: 0;
-  }
-  
+  } 
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
 }
 
 #task-dialog {
@@ -251,6 +309,14 @@ body {
   animation: scaleOut 0.5s ease forwards;
 }
 
+.show::backdrop {
+  animation: fadeIn 0.7s ease forwards;
+}
+
+.hide::backdrop {
+  animation: fadeOut 0.5s ease forwards;
+}
+
 #close-task-dialog,
 #close-project-dialog {
   padding: 0;
@@ -263,9 +329,17 @@ body {
 #task-dialog,
 #project-dialog,
 #confirm-project-delete {
+  font-family: 'inconsolatamedium';
   border-radius: 15px;
   box-shadow: 0 0 15px;
   width: 300px;
+  border: none;
+}
+
+#task-dialog::backdrop,
+#project-dialog::backdrop,
+#confirm-project-delete::backdrop {
+  backdrop-filter: blur(2px);
 }
 
 #task-form,
@@ -305,11 +379,16 @@ body {
 #confirm-delete,
 #cancel-delete {
   border-radius: 5px;
-  background-color: bisque;
+  background-color: #E2C499;
   font-size: 1.3rem;
   padding: 4px;
   cursor: pointer;
   transition: 0.5s;
+  border: none;
+}
+
+#confirm-delete {
+  background-color: #C8000A;
 }
 
 #add-new-task:hover,
@@ -317,7 +396,7 @@ body {
 #confirm-delete:hover,
 #cancel-delete:hover {
   transform: translateY(-3px);
-  box-shadow: 1px 2px 3px;
+  box-shadow: 0 3px 5px rgb(0, 0, 0, 0.5);
 }
 
 input[type=text],
@@ -333,4 +412,63 @@ input[type=text]:focus,
 input[type=date]:focus,
 select:focus {
   box-shadow: 0 0 7px red;
+}
+
+#menu-toggle,
+#close-menu {
+  display: none;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  body {
+    display: block;
+  }
+
+  #menu-toggle {
+    display: block;
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 10;
+    background-color: transparent;
+    border: none;
+  }
+
+  #close-menu {
+    display: inline;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    right: 0;
+  }
+  
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 250px;
+    height: 100%;
+    z-index: 100;
+    transition: left 0.3s ease;
+  }
+  
+  .sidebar-logo {
+    justify-content: space-between;
+  }
+  
+  .sidebar.active {
+    left: 0;
+  }
+
+  .main-section {
+    margin-left: 0;
+  }
+
+  .main-section-header {
+    width: 85vw;
+    align-self: flex-end;
+    justify-content: center;
+    gap: 1rem;
+  }
 }

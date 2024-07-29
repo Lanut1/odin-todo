@@ -4,7 +4,7 @@ import "./style.css";
 import logo from "./images/check.png";
 import { submitProjectForm, createSidebarProject, displayProject, openEditProjectDialog, openDeleteProjectDialog, deleteProject, showAllProjects } from "./projectManager.js";
 import { submitTaskForm, showAddTaskDialog, openEditTaskDialog, deleteTask, completeTask, showAllTasks, showTodayTasks, showTomorrowTasks, showWeekTasks, showOverdue, showImportant, showCompleted } from "./taskManager.js";
-import { openDialog, closeDialog, initializeNextId } from "./utils.js";
+import { openDialog, closeDialog, initializeNextId, isMobile } from "./utils.js";
 import 'pretty-checkbox/dist/pretty-checkbox.min.css';
 
 document.querySelector(".sidebar-logo img").src = logo;
@@ -149,3 +149,22 @@ showImportantButton.addEventListener("click",  () => showImportant(mainSectionHe
 
 const showCompletedButton = document.querySelector("#show-completed");
 showCompletedButton.addEventListener("click", () => showCompleted(mainSectionHeader, mainSectionContent));
+
+const sidebar = document.querySelector(".sidebar");
+const menuToggle = document.querySelector("#menu-toggle");
+menuToggle.addEventListener("click", () => {
+    sidebar.classList.add("active");
+});
+
+const closeMenu = document.querySelector("#close-menu");
+closeMenu.addEventListener("click", () => {
+    sidebar.classList.remove("active");
+})
+
+document.addEventListener("click", (event) => {
+    const clickedMenuToggle = event.target.closest('#menu-toggle');
+    if (isMobile() && !sidebar.contains(event.target) && !clickedMenuToggle) {
+        sidebar.classList.remove("active");
+    }
+})
+
