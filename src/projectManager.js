@@ -64,9 +64,9 @@ class ProjectManager {
     displayProject(projectId, mainSectionContent, mainSectionHeader) {
         mainSectionHeader.replaceChildren();
         mainSectionContent.replaceChildren();
-        const projectTpDisplay = this.projects.find((project) => project.id == projectId);
+        const projectToDisplay = this.projects.find((project) => project.id == projectId);
         const projectHeader = createDOMElement("div", "project-header");
-        projectHeader.innerText = `${projectTpDisplay.title} Project`;
+        projectHeader.innerText = `${projectToDisplay.title} Project`;
         mainSectionHeader.appendChild(projectHeader);
 
         const editContainer = createDOMElement("div", "peoject-edit-container");

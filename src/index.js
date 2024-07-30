@@ -4,7 +4,7 @@ import "./style.css";
 import logo from "./images/check.png";
 import TaskManager from "./taskManager.js";
 import ProjectManager from "./projectManager.js";
-import { openDialog, closeDialog, initializeNextId, isMobile, initializeEventListeners } from "./utils.js";
+import { openDialog, closeDialog, initializeNextId, isMobile, initializeEventListeners, initializeSampleData } from "./utils.js";
 import 'pretty-checkbox/dist/pretty-checkbox.min.css';
 
 document.querySelector(".sidebar-logo img").src = logo;
@@ -19,6 +19,8 @@ const closeTaskDialog = document.querySelector("#close-task-dialog");
 const closeProjectDialog = document.querySelector("#close-project-dialog");
 const taskForm = document.querySelector("#task-form");
 const projectForm = document.querySelector("#project-form");
+
+initializeSampleData();
 
 const taskManager = new TaskManager;
 const projectManager = new ProjectManager;
@@ -37,7 +39,7 @@ taskForm.addEventListener("submit", (event) => {
     if (taskProjectId == 0) taskManager.showAllTasks(mainSectionHeader, mainSectionContent);
     else {
         projectManager.displayProject(taskProjectId, mainSectionContent, mainSectionHeader);
-        const tasksToDisplay = taskManager.loadTasks().filter((task) => task.projectId === taskProjectId);
+        const tasksToDisplay = taskManager.loadTasks().filter((task) => task.projectId == taskProjectId);
         tasksToDisplay.forEach((task) => taskManager.createTaskCard(task, mainSectionContent));
     }
 })
@@ -58,7 +60,7 @@ sidebarProjects.addEventListener("click", (event) => {
         const projectToShow = event.target.closest(".sidebar-project-card");
         const projectId = projectToShow.dataset.projectId;
         projectManager.displayProject(projectId, mainSectionContent, mainSectionHeader);
-        const tasksToDisplay = taskManager.loadTasks().filter((task) => task.projectId === projectId);
+        const tasksToDisplay = taskManager.loadTasks().filter((task) => task.projectId == projectId);
         tasksToDisplay.forEach((task) => taskManager.createTaskCard(task, mainSectionContent));
     }
 })
@@ -91,7 +93,7 @@ mainSectionContent.addEventListener("click", (event) => {
     } else if (projectCard) {
         const projectId = projectCard.dataset.projectId;
         projectManager.displayProject(projectId, mainSectionContent, mainSectionHeader);
-        const tasksToDisplay = taskManager.loadTasks().filter((task) => task.projectId === projectId);
+        const tasksToDisplay = taskManager.loadTasks().filter((task) => task.projectId == projectId);
         tasksToDisplay.forEach((task) => taskManager.createTaskCard(task, mainSectionContent));
     } else if (addProject) {
         const projectId = addProject.dataset.projectId;
@@ -109,10 +111,12 @@ addProjectButton.addEventListener("click", () => {
 });
 
 closeTaskDialog.addEventListener("click", () => {
+    taskForm.reset();
     closeDialog(taskDialog);
 });
 
 closeProjectDialog.addEventListener("click", () => {
+    projectForm.reset();
     closeDialog(projectDialog);
 });
 
